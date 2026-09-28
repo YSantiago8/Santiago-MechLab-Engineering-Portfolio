@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Profesional | Yomar Santiago Santiago</title>
+    <style>
+        :root {
+            --sidebar-bg: #0f172a; /* Pizarra Profundo */
+            --primary-color: #1e293b; /* Pizarra Oscuro */
+            --secondary-color: #334155; /* Gris Neutro Principal */
+            --accent-color: #475569; /* Gris Medio */
+            --light-accent: #94a3b8; /* Gris Plata */
+            --bg-color: #f1f5f9; /* Fondo General Dashboard */
+            --card-bg: #ffffff; /* Blanco Puro */
+            --text-main: #0f172a; /* Texto Principal */
+            --text-muted: #64748b; /* Texto Secundario */
+            --border-color: #cbd5e1; /* Bordes */
+            --hover-bg: #e2e8f0; /* Hover Suave */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Navegación Panel Lateral */
+        aside {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            color: #ffffff;
+            padding: 2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        aside .profile-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        aside .avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 1rem auto;
+            border: 2px solid var(--light-accent);
+        }
+
+        aside h1 {
+            font-size: 1.2rem;
+            color: #f8fafc;
+        }
+
+        aside p {
+            font-size: 0.85rem;
+            color: var(--light-accent);
+            margin-top: 0.2rem;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+        }
+
+        /* Área de Contenido Principal */
+        main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2.5rem;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+            color: #ffffff;
+            border: none;
+        }
+
+        /* Estructura de Tarjetas */
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--hover-bg);
+            padding-bottom: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .sub-card {
+            background: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .sub-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+            background: #ffffff;
+        }
+
+        .sub-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+        }
+
+        /* Badges / Etiquetas */
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background-color: var(--hover-bg);
+            color: var(--primary-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Botones y Controles */
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .btn {
+            background-color: var(--bg-color);
+            color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover, .btn.active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
+
+        /* Calculadora y Cajas Interactivas */
+        .interactive-box {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--secondary-color);
+        }
+
+        .input-group input {
+            padding: 0.55rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .result-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary-color);
+            font-size: 0.95rem;
+        }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #ffffff;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Canvas Chart */
+        .chart-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Panel Lateral (Sidebar) -->
+    <aside>
+        <div class="profile-header">
+            <div class="avatar">YS</div>
+            <h1>Yomar Santiago</h1>
+            <p>Ingeniería Mecánica</p>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem;">Guayama, PR</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#perfil"><span>▪</span> Perfil Profesional</a></li>
+                <li><a href="#competencias"><span>▪</span> Competencias</a></li>
+                <li><a href="#evaluacion"><span>▪</span> Gráfico de Dominio</a></li>
+                <li><a href="#calculadora"><span>▪</span> Calculadora Técnica</a></li>
+                <li><a href="#mantenimiento"><span>▪</span> Protocolo TPM</a></li>
+                <li><a href="#proyectos"><span>▪</span> Proyectos</a></li>
+                <li><a href="#contacto"><span>▪</span> Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal (Dashboard) -->
+    <main>
+        <div class="header-banner">
+            <h2>Yomar Santiago Santiago</h2>
+            <p>Portafolio Profesional | Diseño CAD/CAM, Termofluidos, Robótica y Mantenimiento Industrial</p>
+        </div>
+
+        <!-- Perfil Profesional -->
+        <section id="perfil" class="card">
+            <h2>Perfil Profesional</h2>
+            <p style="color: var(--secondary-color); line-height: 1.7;">
+                Estudiante de Ingeniería Mecánica enfocado en el diseño, análisis y optimización de sistemas mecánicos, térmicos y mecatrónicos. Orientado a la simulación numérica por Elementos Finitos (FEA) y Dinámica de Fluidos Computacional (CFD), así como a la automatización industrial, instrumentación y gestión de mantenimiento predictivo.
+            </p>
+            <div class="badge-container">
+                <span class="badge">SolidWorks</span>
+                <span class="badge">ANSYS FEA/CFD</span>
+                <span class="badge">MATLAB</span>
+                <span class="badge">AutoCAD</span>
+                <span class="badge">Termodinámica</span>
+                <span class="badge">Mecatrónica</span>
+                <span class="badge">Manufactura CNC</span>
+                <span class="badge">Mantenimiento TPM</span>
+            </div>
+        </section>
+
+        <!-- Evaluación Gráfica -->
+        <section id="evaluacion" class="card">
+            <h2>Evaluación Dinámica de Competencias</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                Visualización gráfica en tiempo real sobre el nivel de dominio técnico por áreas especializadas.
+            </p>
+            <div class="chart-wrapper">
+                <canvas id="skillsRadar" width="360" height="360"></canvas>
+            </div>
+        </section>
+
+        <!-- Competencias Técnicas -->
+        <section id="competencias" class="card">
+            <h2>Competencias Técnicas</h2>
+            <div class="filter-buttons">
+                <button class="btn active" onclick="filterSkills('all', event)">Todas</button>
+                <button class="btn" onclick="filterSkills('cad', event)">CAD / FEA / CFD</button>
+                <button class="btn" onclick="filterSkills('thermo', event)">Termofluidos</button>
+                <button class="btn" onclick="filterSkills('meca', event)">Mecatrónica</button>
+                <button class="btn" onclick="filterSkills('maint', event)">Manufactura & Mantenimiento</button>
+            </div>
+            <div class="grid">
+                <div class="sub-card skill-card cad">
+                    <h3>Diseño & Simulación Estructural</h3>
+                    <ul>
+                        <li>SolidWorks, Autodesk Inventor y AutoCAD</li>
+                        <li>Análisis de Esfuerzos y Fatiga (FEA)</li>
+                        <li>Dinámica de Fluidos Computacional (CFD)</li>
+                        <li>Tolerancias Geométricas (GD&T)</li>
+                    </ul>
+                </div>
+                <div class="sub-card skill-card thermo">
+                    <h3>Sistemas Térmicos e Hidráulicos</h3>
+                    <ul>
+                        <li>Termodinámica aplicada y Transferencia de Calor</li>
+                        <li>Diseño de redes de tuberías y bombas</li>
+                        <li>Sistemas Oleohidráulicos y Neumáticos</li>
+                        <li>Sistemas HVAC y Turbomaquinaria</li>
+                    </ul>
+                </div>
+                <div class="sub-card skill-card maint">
+                    <h3>Manufactura & Mantenimiento</h3>
+                    <ul>
+                        <li>Mecanizado tradicional y Programación CNC</li>
+                        <li>Ensayos de Materiales (Tracción, Dureza)</li>
+                        <li>Mantenimiento RCM y TPM</li>
+                        <li>Diseño de Elementos de Máquinas</li>
+                    </ul>
+                </div>
+                <div class="sub-card skill-card meca">
+                    <h3>Mecatrónica & Automatización</h3>
+                    <ul>
+                        <li>Sensores y Actuadores Electroneumáticos</li>
+                        <li>Programación de PLCs y Microcontroladores</li>
+                        <li>Cinemática de Robótica Industrial</li>
+                        <li>Instrumentación y Control</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculadora de Ingeniería -->
+        <section id="calculadora" class="card">
+            <h2>Calculadora Técnica de Ingeniería</h2>
+            <div class="filter-buttons">
+                <button class="btn" onclick="switchCalc('fos')">Factor de Seguridad (FoS)</button>
+                <button class="btn" onclick="switchCalc('freq')">Frecuencia Natural Vibracional</button>
+            </div>
+
+            <div class="interactive-box" id="fosCalcBox">
+                <h3 style="font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--secondary-color);">Factor de Seguridad Estructural (FoS)</h3>
+                <div class="calc-grid">
+                    <div class="input-group">
+                        <label for="yieldStrength">Límite Elástico (Sy) [MPa]:</label>
+                        <input type="number" id="yieldStrength" value="250">
+                    </div>
+                    <div class="input-group">
+                        <label for="appliedStress">Esfuerzo Aplicado (σ) [MPa]:</label>
+                        <input type="number" id="appliedStress" value="100">
+                    </div>
+                </div>
+                <button class="btn" onclick="calculateFoS()">Calcular FoS</button>
+                <div class="result-box" id="fosResult">
+                    <strong>Factor de Seguridad (n):</strong> 2.50 — <span style="color: green;">Estructura Segura</span>
+                </div>
+            </div>
+
+            <div class="interactive-box" id="freqCalcBox" style="display: none;">
+                <h3 style="font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--secondary-color);">Frecuencia Natural de Vibración (1-DOF)</h3>
+                <div class="calc-grid">
+                    <div class="input-group">
+                        <label for="stiffness">Rigidez (k) [N/m]:</label>
+                        <input type="number" id="stiffness" value="50000">
+                    </div>
+                    <div class="input-group">
+                        <label for="mass">Masa (m) [kg]:</label>
+                        <input type="number" id="mass" value="20">
+                    </div>
+                </div>
+                <button class="btn" onclick="calculateFreq()">Calcular Frecuencia</button>
+                <div class="result-box" id="freqResult">
+                    <strong>Frecuencia Natural (fn):</strong> 7.96 Hz (50.00 rad/s)
+                </div>
+            </div>
+        </section>
+
+        <!-- Inspección Industrial -->
+        <section id="mantenimiento" class="card">
+            <h2>Protocolo de Inspección Industrial (TPM)</h2>
+            <div id="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1" onchange="updateChecklist()">
+                    <label for="check1">Análisis de vibraciones en rodamientos de bombas centrífugas.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2" onchange="updateChecklist()">
+                    <label for="check2">Inspección termográfica en tableros de control y motores.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3" onchange="updateChecklist()">
+                    <label for="check3">Verificación de viscosidad y lubricación en cajas reductoras.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4" onchange="updateChecklist()">
+                    <label for="check4">Monitoreo de presión en líneas neumáticas e hidráulicas.</label>
+                </div>
+            </div>
+            <div class="result-box" id="checklistResult">
+                <strong>Estado de Inspección:</strong> 0 de 4 tareas completadas (0%)
+            </div>
+        </section>
+
+        <!-- Visor de Proyectos -->
+        <section id="proyectos" class="card">
+            <h2>Visor Interactivo de Proyectos</h2>
+            <div class="filter-buttons">
+                <button class="btn" onclick="showProject('intercambiador')">Intercambiador de Calor</button>
+                <button class="btn" onclick="showProject('chasis')">Chasis Mecánico (FEA)</button>
+                <button class="btn" onclick="showProject('robot')">Brazo Robótico Neumático</button>
+                <button class="btn" onclick="showProject('motor')">Motor de Combustión</button>
+            </div>
+            <div class="interactive-box" id="projectDetails">
+                <h3 id="projTitle" style="color: var(--secondary-color); margin-bottom: 0.5rem;">Optimización de Intercambiador de Calor</h3>
+                <p id="projDesc" style="font-size: 0.95rem; color: var(--secondary-color);">Modelado térmico y simulación fluídica mediante CFD para optimizar la tasa de transferencia de calor y minimizar caídas de presión.</p>
+                <div style="margin-top: 0.8rem; font-size: 0.9rem;">
+                    <strong>Métricas Clave:</strong> <span id="projMetrics">Eficacia térmica incrementada en un 18% | Reducción de caída de presión: 12%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="card">
+            <h2>Información de Contacto</h2>
+            <p><strong>Especialista:</strong> Yomar Santiago Santiago</p>
+            <p><strong>Correo Electrónico:</strong> santiagoyomar36@gmail.com</p>
+            <p><strong>Ubicación:</strong> Guayama, PR</p>
+            <p><strong>Especialidad:</strong> Ingeniería Mecánica</p>
+        </section>
+    </main>
+
+    <script>
+        // Radar Chart en Canvas
+        window.onload = function() {
+            drawRadar();
+        };
+
+        function drawRadar() {
+            const canvas = document.getElementById('skillsRadar');
+            if (!canvas.getContext) return;
+            const ctx = canvas.getContext('2d');
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 120;
+            const labels = ['CAD 3D', 'FEA/CFD', 'Termofluidos', 'Mecatrónica', 'Mantenimiento'];
+            const values = [0.90, 0.85, 0.88, 0.80, 0.85];
+            const numVars = labels.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let level = 1; level <= 4; level++) {
+                ctx.beginPath();
+                ctx.strokeStyle = '#cbd5e1';
+                const r = (radius / 4) * level;
+                for (let i = 0; i < numVars; i++) {
+                    const angle = (Math.PI * 2 / numVars) * i - Math.PI / 2;
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY + r * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = '#1e293b';
+            ctx.font = '11px Segoe UI, sans-serif';
+            ctx.textAlign = 'center';
+            for (let i = 0; i < numVars; i++) {
+                const angle = (Math.PI * 2 / numVars) * i - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.stroke();
+
+                const labelX = centerX + (radius + 25) * Math.cos(angle);
+                const labelY = centerY + (radius + 12) * Math.sin(angle);
+                ctx.fillText(labels[i], labelX, labelY);
+            }
+
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(51, 65, 85, 0.35)';
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < numVars; i++) {
+                const angle = (Math.PI * 2 / numVars) * i - Math.PI / 2;
+                const r = radius * values[i];
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY + r * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        // Alternar Calculadoras
+        function switchCalc(type) {
+            document.getElementById('fosCalcBox').style.display = (type === 'fos') ? 'block' : 'none';
+            document.getElementById('freqCalcBox').style.display = (type === 'freq') ? 'block' : 'none';
+        }
+
+        // Calculadora FoS
+        function calculateFoS() {
+            const yieldStr = parseFloat(document.getElementById('yieldStrength').value);
+            const appliedStr = parseFloat(document.getElementById('appliedStress').value);
+            const resultDiv = document.getElementById('fosResult');
+
+            if (isNaN(yieldStr) || isNaN(appliedStr) || appliedStr <= 0) {
+                resultDiv.innerHTML = "<strong>Error:</strong> Ingrese valores válidos mayores a cero.";
+                return;
+            }
+
+            const fos = (yieldStr / appliedStr).toFixed(2);
+            let status = (fos > 1.5) ? "<span style='color: green;'>Estructura Segura</span>" : "<span style='color: red;'>Riesgo Estructural</span>";
+            resultDiv.innerHTML = `<strong>Factor de Seguridad (n):</strong> ${fos} — ${status}`;
+        }
+
+        // Calculadora Frecuencia Natural
+        function calculateFreq() {
+            const k = parseFloat(document.getElementById('stiffness').value);
+            const m = parseFloat(document.getElementById('mass').value);
+            const resultDiv = document.getElementById('freqResult');
+
+            if (isNaN(k) || isNaN(m) || m <= 0 || k <= 0) {
+                resultDiv.innerHTML = "<strong>Error:</strong> Ingrese valores válidos mayores a cero.";
+                return;
+            }
+
+            const omega = Math.sqrt(k / m);
+            const fn = (omega / (2 * Math.PI)).toFixed(2);
+            resultDiv.innerHTML = `<strong>Frecuencia Natural (fn):</strong> ${fn} Hz (${omega.toFixed(2)} rad/s)`;
+        }
+
+        // Checklist TPM
+        function updateChecklist() {
+            let checked = 0;
+            for (let i = 1; i <= 4; i++) {
+                if (document.getElementById(`check${i}`).checked) checked++;
+            }
+            const percentage = Math.round((checked / 4) * 100);
+            document.getElementById('checklistResult').innerHTML = 
+                `<strong>Estado de Inspección:</strong> ${checked} de 4 tareas completadas (${percentage}%)`;
+        }
+
+        // Filtro de Competencias
+        function filterSkills(category, evt) {
+            const cards = document.querySelectorAll('.skill-card');
+            const buttons = document.querySelectorAll('#competencias .btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            evt.target.classList.add('active');
+
+            cards.forEach(card => {
+                card.style.display = (category === 'all' || card.classList.contains(category)) ? 'block' : 'none';
+            });
+        }
+
+        // Visor de Proyectos
+        const projectData = {
+            intercambiador: {
+                title: "Optimización de Intercambiador de Calor de Tubo y Carcasa",
+                desc: "Modelado térmico y simulación fluídica mediante CFD para optimizar la tasa de transferencia de calor y evaluar la caída de presión.",
+                metrics: "Eficacia térmica incrementada en un 18% | Reducción de caída de presión: 12%"
+            },
+            chasis: {
+                title: "Análisis Estructural y Rediseño de Chasis Mecánico",
+                desc: "Evaluación de esfuerzos estáticos, dinámicos y de fatiga mediante FEA en SolidWorks.",
+                metrics: "Reducción de peso: 15% | Factor de seguridad mantenido en 2.1"
+            },
+            robot: {
+                title: "Diseño y Automatización de Brazo Robótico Neumático",
+                desc: "Sistema electroneumático de 3 grados de libertad controlado por PLC para tareas de pick-and-place.",
+                metrics: "Tiempo de ciclo: 3.2 segundos | Precisión de posicionamiento: ±0.5 mm"
+            },
+            motor: {
+                title: "Análisis Térmico de Motor de Combustión Interna",
+                desc: "Estudio del ciclo termodinámico y simulación de flujo de admisión para optimizar el rendimiento volumétrico.",
+                metrics: "Mejora del rendimiento volumétrico: 8% | Disminución de pérdidas por bombeo"
+            }
+        };
+
+        function showProject(key) {
+            const proj = projectData[key];
+            if (proj) {
+                document.getElementById('projTitle').innerText = proj.title;
+                document.getElementById('projDesc').innerText = proj.desc;
+                document.getElementById('projMetrics').innerText = proj.metrics;
+            }
+        }
+    </script>
+</body>
+</html>
